@@ -15,8 +15,8 @@
   <div class="row mb-2">
   	{%for items in posts.latest2%}
     <div class="col-md-6">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style = "background: linear-gradient(rgba(0, 0, 50, 0.6), rgba(0, 0, 100, 0.6)),url({{items.lBan.url}}); background-size:cover;">
+        <div class="col p-4 d-flex flex-column position-static text-light">
           <strong class="d-inline-block mb-2 text-success">{{items.category}}</strong>
           <h3 class="mb-0">{{items.title}}</h3>
           <div class="mb-1 text-muted">{{items.postDate}}</div>
@@ -24,7 +24,7 @@
           <a href="{%url 'cms:detail' items.pk%}" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <img class="bd-placeholder-img" width="200" height="250" src = "{{items.pBan.url}}" />
+          
         </div>
       </div>
     </div>
