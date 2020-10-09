@@ -1,0 +1,43 @@
+
+{%extends "cms/base.html"%}
+
+{%block content%}
+<hr>
+{%for i in monthList%}
+<button type = "button" class = "months btn btn-primary" id = "{{i}}" onclick = "goTo('{{i}}')">{{i}}</button>
+<hr>
+{%endfor%}
+{%endblock%}
+
+{%block script%}
+<script> 
+	var monthList = {
+		'January':1,
+		'February':2,
+		'March':3,
+		'April':4,
+		'May':5,
+		'June':6,
+		'July':7,
+		'August':8,
+		'September':9,
+		'October':10,
+		'November':11,
+		'December':12
+	}
+
+	function goTo(id){
+		var moment = id;
+		momentList = moment.split(' ');
+		var month = momentList[0];
+		var year = momentList[1];
+		month = monthList[month];
+		console.log(month);
+		console.log(year);
+		window.location = `/cms/${year}/${month}/`;
+	}
+</script>
+{%endblock%}
+
+{%block sidebar%}
+{%endblock%}

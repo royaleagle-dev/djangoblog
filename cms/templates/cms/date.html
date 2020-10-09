@@ -1,0 +1,5 @@
+<ul>
+    {% for post in object_list %}
+        <li>{{ post.postDate|date:"F j, Y" }}: {{ post.title }}</li>
+    {% endfor %}
+</ul>

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from . models import Post
+from cms.dateManip import months
 
 class IndexListView(ListView):
 	model = Post
@@ -28,4 +29,30 @@ class PostDetailView(DetailView):
 		#obj = super().get_object
 		context['related'] = Post.objects.filter(category__exact = self.object.category)
 		return context
+
+
+
+from django.views.generic.dates import MonthArchiveView
+
+class PostMonthArchive(MonthArchiveView):
+	queryset = Post.objects.all()
+	date_field = "postDate"
+	template_name = "cms/date.html"
+
+
+def monthArchive(request):
+	posts = Post.objects.all()
+	monthList = [ ];
+	monthList = set(monthList)
+
+	for i in posts:
+		result = months(i.postDate.month) + ' '+ str(i.postDate.year)
+		monthList.add(result)
+
+	context = {
+	'monthList':monthList
+	}
+	return render(request, 'cms/monthArchive.html', context)
+
+
 	
