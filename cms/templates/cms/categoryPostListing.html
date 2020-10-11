@@ -1,0 +1,26 @@
+{%extends "cms/base.html"%}
+
+{%block content%}
+
+	<div class = "row">
+		<div class = "col-md-8">
+			<h2>{{category}}</h2>
+			<hr>
+
+			{%for items in posts%}
+			<div style = "background-color:lightgrey;padding:10px;" class = "mb-3">
+				<h4>{{items.title}}</h4> 
+				<small><a href = "{%url 'cms:detail' items.pk%}">Read Post</a></small>
+			</div>
+			{%endfor%}
+
+
+		</div>
+		<div class = "col-md-4">
+		</div>
+	</div>
+
+{%endblock%}
+
+{%block sidebar%}
+{%endblock%}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from . models import Post
+from . models import Post, Category
 from cms.dateManip import months
 
 class IndexListView(ListView):
@@ -10,6 +10,7 @@ class IndexListView(ListView):
 
 	def queryset(self):
 		queryset = {
+			'categories':Category.objects.all()[:7],
 			'latest': Post.objects.filter(postState__exact = 'p').order_by('-id')[:1],
 			'latest2':Post.objects.filter(postState__exact = 'p').order_by('-id')[:2],
 			'latest10':Post.objects.filter(postState__exact = 'p').order_by('-id')[:10],
@@ -53,6 +54,17 @@ def monthArchive(request):
 	'monthList':monthList
 	}
 	return render(request, 'cms/monthArchive.html', context)
+
+
+def categoryPostListing(request):
+	categoryId = request.GET.get('category')
+	category = Category.objects.get(id=categoryId)
+	posts = Post.objects.filter(category__id__exact = categoryId)
+	context = {
+	'posts':posts,
+	'category':category
+	}
+	return render(request, 'cms/categoryPostListing.html', context)
 
 
 	
